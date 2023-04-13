@@ -12,7 +12,8 @@ class SongController extends Controller
     public function index()
     {
         //get Genres
-        $songs = Song::all();
+        $songs = Song::with(['genre'])->get();
+        $songs->makeHidden(['genre_id']);
 
         //return collection of Genres as a resource
         return response()->json($songs);
@@ -49,7 +50,7 @@ class SongController extends Controller
 
     public function show($id)
     {
-        $song=Song::findOrFail($id);
+        $song = Song::with(['genre'])->findOrFail($id);
 
         //return single post as a resource
         return response()->json([

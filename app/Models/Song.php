@@ -15,4 +15,8 @@ class Song extends Model
         'release',
         'genre_id'
     ];
+
+    public function genre() {
+        return $this->belongsTo(Genre::class);
+    }
 }
